@@ -1,3 +1,7 @@
+.quiz-wrapper__questions {
+    min-height: 649px;
+}
+
 .quiz-wrapper__results-wrapper {
     display: flex;
     justify-content: center;
