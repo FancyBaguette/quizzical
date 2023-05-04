@@ -1,0 +1,12 @@
+body {
+    font-family: 'Karla', sans-serif;
+    background-color: #F5F7FB;
+    background-image: 
+        url('./assets/blue-blob.svg'),
+        url('./assets/yellow-blob.svg');
+    background-position: 
+        bottom left,
+        top right;
+    background-repeat: no-repeat;
+    background-size: 200px 200px;
+}

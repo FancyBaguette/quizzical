@@ -1,0 +1,23 @@
+.quiz-wrapper__results-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.results-wrapper__score {
+    color: #4D5B9E;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.results-wrapper__btn {
+    background-color: #4D5B9E;
+    color: white;
+    border: 0;
+    border-radius: 16px;
+    font-size: 1.5rem;
+    padding: .5em 1em;
+    cursor: pointer;
+}
