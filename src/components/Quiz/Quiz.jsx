@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "../Question/Question.jsx";
@@ -8,25 +8,28 @@ const Quiz = (props) => {
 
     const [questionsArray, setQuestionsArray] = useState(null)
     const [isGameFinished, setIsGameFinished] = useState(false)
+    const isDataFetched = useRef(false)
 
     useEffect(() => {
+        if (isDataFetched.current) return
+        isDataFetched.current = true
         fetch('https://opentdb.com/api.php?amount=5&type=multiple')
-            .then(response => response.json())
-                .then(data => {
-                    const customQuestionObjects = data.results.map(obj => {
-                        return {
-                            question: decode(obj.question),
-                            correctAnswer: obj.correct_answer,
-                            // Get an array of all answers in a random order and decode their HTML entities
-                            answersArray: 
-                                [obj.correct_answer, ...obj.incorrect_answers].sort((a,b) => Math.random() - 0.5).map(answer => decode(answer)),
-                            isCorrectAnswerSelected: false,
-                            selectedAnswer: null,
-                            id: nanoid()
-                        }
-                    })
-                    setQuestionsArray(customQuestionObjects)
+        .then(response => response.json())
+            .then(data => {
+                const customQuestionObjects = data.results.map(obj => {
+                    return {
+                        question: decode(obj.question),
+                        correctAnswer: obj.correct_answer,
+                        // Get an array of all answers in a random order and decode their HTML entities
+                        answersArray: 
+                            [obj.correct_answer, ...obj.incorrect_answers].sort((a,b) => Math.random() - 0.5).map(answer => decode(answer)),
+                        isCorrectAnswerSelected: false,
+                        selectedAnswer: null,
+                        id: nanoid()
+                    }
                 })
+                setQuestionsArray(customQuestionObjects)
+            })
     },[])
 
     const getTotalScore = () => {
