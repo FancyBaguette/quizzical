@@ -46,7 +46,6 @@ const Quiz = (props) => {
                 {
                     questionsArray && questionsArray.map(question => (
                         <Question
-                            questionsArray={questionsArray}
                             setQuestionsArray={setQuestionsArray}
                             isGameFinished={isGameFinished}
                             question={question.question}
@@ -60,15 +59,14 @@ const Quiz = (props) => {
                 }
             </div>
             <div className="quiz-wrapper__results-wrapper">
-                {
-                    !isGameFinished ?
+                { !isGameFinished ? (
                     <button 
                         className="results-wrapper__btn" 
                         onClick={() => setIsGameFinished(prevState => !prevState)}
                     >
                         Check answers
                     </button>
-                    :
+                ) : (
                     <>
                         <p className="results-wrapper__score">
                             You scored {getTotalScore()} / {questionsArray.length} correct answers
@@ -80,7 +78,7 @@ const Quiz = (props) => {
                             Play again
                         </button>
                     </>
-                }
+                )}
             </div>
         </div>
     )
