@@ -17,8 +17,9 @@ const Quiz = (props) => {
                         return {
                             question: decode(obj.question),
                             correctAnswer: obj.correct_answer,
-                            // Get an array of all answers in a random order
-                            answersArray: [obj.correct_answer, ...obj.incorrect_answers].sort((a,b) => Math.random() - 0.5),
+                            // Get an array of all answers in a random order and decode their HTML entities
+                            answersArray: 
+                                [obj.correct_answer, ...obj.incorrect_answers].sort((a,b) => Math.random() - 0.5).map(answer => decode(answer)),
                             isCorrectAnswerSelected: false,
                             selectedAnswer: null,
                             id: nanoid()
